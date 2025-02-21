@@ -38,8 +38,15 @@ while True:
             for produto in estoque:
                 if produto['nome'].lower() == nomeProduto.lower():
                     quantidadeRemover = int(input('Quantas unidades deseja remover? '))
-                    produto['quantidade'] -= quantidadeRemover
-                    print(f"Quantidade de {produto['nome']} atualizada! Agora temos {produto['quantidade']} unidadades no estoque.\n")
+                    if quantidadeRemover > produto['quantidade']:
+                        print(f"Não é possível remover {quantidadeRemover} unidades, pois só há {produto['quantidade']} unidades em estoque.\n")
+                    else:
+                        produto['quantidade'] -= quantidadeRemover
+                        print(f"Quantidade de {produto['nome']} atualizada! Agora temos {produto['quantidade']} unidadades no estoque.\n")
+                    produtoEncontrado = True
+                    break
+                if not produtoEncontrado:
+                    print(f"O produto {nomeProduto} não foi encontrado no estoque.\n")
 
         elif acao == 4:
             if not estoque:
